@@ -1,1 +1,39 @@
-\# 忽略所有虚拟机磁盘文件 *.vdi *.vmdk *.vhd # 忽略所有光盘镜像文件 *.iso # 忽略大型压缩包（可选） *.zip *.rar *.7z
+# VM images and local virtualization artifacts
+*.vdi
+*.vmdk
+*.vhd
+*.iso
+*.zip
+*.rar
+*.7z
+
+# Python/Node local environments
+.venv/
+.venv_broken_*/
+__pycache__/
+*.pyc
+.pytest_cache/
+node_modules/
+dist/
+build/
+.vite/
+
+# Local runtime files
+logs/
+*.log
+*.pid
+.env
+
+# Project-specific generated data
+kylin-safeops/.venv/
+kylin-safeops/.venv_broken_*/
+kylin-safeops/frontend/node_modules/
+kylin-safeops/frontend/dist/
+kylin-safeops/logs/
+kylin-safeops/data/audit/*
+kylin-safeops/data/replay/*
+!kylin-safeops/data/audit/.gitkeep
+!kylin-safeops/data/replay/.gitkeep
+
+# VM and migration environment payloads
+vm/

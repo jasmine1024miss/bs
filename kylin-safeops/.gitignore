@@ -1,0 +1,13 @@
+.env
+.venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+node_modules/
+dist/
+build/
+.vite/
+data/audit/*
+data/replay/*
+!data/audit/.gitkeep
+!data/replay/.gitkeep

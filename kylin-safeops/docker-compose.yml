@@ -1,0 +1,30 @@
+services:
+  backend:
+    build:
+      context: .
+      dockerfile: deploy/docker/backend.Dockerfile
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./backend:/app/backend
+      - ./data:/app/data
+    environment:
+      - DEEPSEEK_API_KEY=${DEEPSEEK_API_KEY:-}
+      - DEEPSEEK_ENABLED=${DEEPSEEK_ENABLED:-false}
+      - DEEPSEEK_BASE_URL=${DEEPSEEK_BASE_URL:-https://api.deepseek.com}
+      - DEEPSEEK_MODEL=${DEEPSEEK_MODEL:-deepseek-reasoner}
+      - SAFEOPS_MODE=${SAFEOPS_MODE:-demo}
+    command: uvicorn backend.app.main:app --host 0.0.0.0 --port 8000 --reload
+
+  frontend:
+    build:
+      context: .
+      dockerfile: deploy/docker/frontend.Dockerfile
+    ports:
+      - "5173:5173"
+    volumes:
+      - ./frontend:/app/frontend
+      - /app/frontend/node_modules
+    environment:
+      - VITE_API_BASE_URL=http://localhost:8000
+    command: npm run dev -- --host 0.0.0.0
